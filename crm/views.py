@@ -14,9 +14,24 @@ from . models import Thought, Profile#Importing thought from model.py
 
 from django.contrib.auth.models import User
 
+import boto3
+from django.conf import settings
+from django.http import HttpResponse
 
 
 # Create your views here.
+
+
+    
+sns = boto3.client(
+    "sns",
+    region_name="eu-west-1",  # Replace 'your_region' with your AWS region
+    aws_access_key_id="ASIATUYJP7SUH2F3ZJWA",  # Replace 'your_access_key' with your AWS access key
+    aws_secret_access_key="y7xq33gtzkmbClcdNzvCp+kaliNpn70GAIXBEBiz",  # Replace 'your_secret_key' with your AWS secret key
+    aws_session_token = "IQoJb3JpZ2luX2VjEG0aCXVzLWVhc3QtMSJHMEUCIFWIEYC36CMSDM9ZQr0RU7cW/7tPcpzgDKiusROaMpiSAiEAzNvq3b3exdfbRBDD4LXc4LQvA/uJz02pyAydM9eFgtAqhAQIxv//////////ARADGgwyNTA3Mzg2Mzc5OTIiDIrZ4mQtnSbG7ySWRyrYA66WRGJp4bZzFzXyavHqfmugRkjf2iGuGTNxsmgL6rkZmT9GKjsgvmHVwjofTyDFU9wq59kEivLX7gIsXwRmW7rzKAG29DtB/g0kTdLl09tCMcmcvY2YiXPpwVKBJ7RmE+FsjHXHH0FqoxUV1bgU7i4/LhE2C/itAwD/UrZ7/jBwqD9sJepwIK+6syiHYxitg4RT8LTRXxw45VpV1BNyC2QIpRvQRuEThgL+Vqm+Ww4qhichng1zv4NuQsRfAbT1A91bcXYRKFUz3v0nceS2AV25WKb3pyLgFI0VSJsdLz/R6f8wz/MLGAM31ib+yeNqI91uQ969eDu3hAWc1bJTGojRw1eMQZrE+bGYQWhKP7e3yoTTxLCXSOJeSQZyzVBwA1F9Csmx3K4BtF0ubGklpyzUrVhPm/7QpwyHQsbGUWhovzCrDH4sAodAkrS70ZsRtI+kcFWWBMQMOf0CFLw6xTYZLhsiju8FhcS+SC5UlVYUEPdzBt7j3NMM/XN7p8bYtL7RH5ShlfFs6CBjyssOXjQi4yqAUu3yQQHwqc9j54H9ZiqCGUmiYkQcawSXoTk+VnqpxSNaYYR85GU8xGeE0x6L0YkQZyrwMS7ZIELz/SJoglJcvOP1Gx0ws6GZqwY6pgFp6Sn34/8P1klJyVvxl1QGbBUmP8re7dX39ewXc7EZejd4DXcYW0BrYjeoj9I5NgcjFUuaEIfrqF8iPsG8tnemLDdjj3y7J/3PLUx8r2/uobljj8JgV1BvGak1zkc6pWz+LX4rMLwQmNI3rM0mgCgkEa+6TwxFMyx2Uh3k1Y07jkO0lNqyXBRKuSKr3xT0UWfM5CKrQIvIEefDkAklVrUmydGb5DqJ"
+)
+
+SNS_TOPIC_ARN = "arn:aws:sns:eu-west-1:250738637992:23119489-sns"
 
 def homepage(request):
 
@@ -35,6 +50,12 @@ def register(request):
             current_user = form.save(commit= False) #this will not save the file immediately to our database
 
             form.save()
+
+            # Send SMS notification on successful registration
+            sns.publish(
+                TopicArn=SNS_TOPIC_ARN,
+                Message=f"New User added",
+            )
 
             profile = Profile.objects.create(user = current_user) #Create a profile model and bind it to the newly created user
 
