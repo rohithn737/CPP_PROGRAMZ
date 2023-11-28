@@ -1,0 +1,61 @@
+{% load static %}
+
+{% load crispy_forms_tags %} <!--To apply the bootstrap 5 in your application-->
+
+<html> 
+
+
+    <head>
+
+        <title> Login </title>
+
+        <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/lux/bootstrap.min.css">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}"> <!--this is the custom css file we made in css--styles.css-->
+
+    </head>
+
+    <br>
+
+    <div class="container bg-white shadow-lg p-5 form-layout">
+
+        <h3> <b> LOGIN TO YOUR ACCOUNT </b> </h3>
+        <hr>
+        <br>
+
+        {%for message in messages %}
+
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+
+                <p id = 'message-timer' class ="alert alert-success float-center text-center message-text" >  {{message}} </p>
+
+            {% endif %}
+
+        {% endfor %}
+
+        <form method="POST" autocomplete="off">
+
+            {% csrf_token %}
+
+            {{LoginForm|crispy}}
+
+            <br><br>
+
+            <button class="btn btn-info btn-md w-100 btn-block p-3" type = "submit" > Login </button>
+
+            
+        </form>
+
+        <script src="{%static 'js/app.js' %}"></script>
+
+    </div>
+
+
+
+
+
+
+
+
+</html>
+

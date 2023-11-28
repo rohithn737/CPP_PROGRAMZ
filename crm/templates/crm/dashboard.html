@@ -1,0 +1,30 @@
+{% extends 'crm/navbar.html'%}
+
+{% block content %}
+
+    <br>
+
+    <div class="container bg-white shadow-lg p-5 form-layout">
+
+        <h1> Dashboard </h1>
+
+        <br>
+
+        <h3> Welcome back {{user}} ! </h3> 
+
+        <br>
+
+         <!--Output the image of the user----->
+
+        <img style="width: 200px;" src = "{{profilePic.profile_pic.url}}">
+        
+        <!--profilePic is the key from view.py----->
+        <!--profile_pic is from models.py----->
+
+        <br><br>
+
+        <a href="{% url 'user-logout'%}"> Logout </a>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% load static %}
+
+{% load crispy_forms_tags %} <!--To apply the bootstrap 5 in your application-->
+
+<html> 
+
+
+    <head>
+
+        <title> Register </title>
+
+        <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/flatly/bootstrap.min.css">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css'%}"> <!--this is the custom css file we made in css--styles.css-->
+
+    </head>
+
+    <br>
+
+    <div class="container bg-white shadow-lg p-5 form-layout" > <!------bg-white will provide white background to the container, p-5 will provide padding---->
+
+        <h3> <b> CREATE YOUR ACCOUNT </b> </h3>
+        <hr>
+        <br>
+
+        <h4> Let us connect to build better tomorrow ! </h4>
+
+        <br>
+        
+        <form method="POST" autocomplete="off">
+
+            {% csrf_token %}
+
+            {{RegistrationForm|crispy}}
+
+            <br>
+
+            <button class="btn btn-success btn-md w-50 btn-block p-3" type = "submit" > Create Account </button> <!--btn-button, btn-lg btn large,  -->
+
+        </form>
+
+        
+
+
+
+    </div>
+
+    <br>
+
+
+
+
+
+
+</html>
+

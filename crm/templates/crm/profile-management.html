@@ -1,0 +1,63 @@
+{% extends 'crm/navbar.html'%}
+
+{% load crispy_forms_tags %} <!--To apply the bootstrap 5 in your application-->
+
+{% block content %}
+
+
+    <br>
+
+    <div class="container bg-white shadow-lg p-5 form-layout">
+
+        <h2> Update username & email </h2>
+
+        <br><br>
+
+        <form method="POST" autocomplete="off">
+
+            {% csrf_token %}
+
+            {{UserUpdateForm|crispy}}
+
+
+            <button class="btn btn-primary btn-md w-100 btn-block p-3" type = "submit" > Update </button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <div class="container bg-white shadow-lg p-5 form-layout">
+
+        <h2> Update profile photo </h2>
+
+        <form method="POST" autocomplete="off" enctype= "multipart/form-data" >
+
+            {% csrf_token %}
+
+            {{ProfileUpdateForm|crispy}}
+
+            <br>
+
+            <button class="btn btn-primary btn-md w-100 btn-block p-3" type = "submit" > Upload profile picture </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="container bg-white shadow-lg p-5 form-layout">
+
+        <h2> Delete your account </h2>
+
+        <br>
+
+        <a href=' {% url 'delete-account' %} ' > Delete your Account </a>
+
+    </div>
+
+    
+
+
+{% endblock %}
