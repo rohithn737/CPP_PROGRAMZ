@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crm',
     "crispy_forms",
     "crispy_bootstrap5",
+    "storages",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -152,6 +153,30 @@ STATICFILES_DIRS = [ BASE_DIR / 'static' ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AWS_ACCESS_KEY_ID = 'ASIATUYJP7SUOFU5XUSX'
-# AWS_SECRET_ACCESS_KEY = '/DGSU0XYplwhnqDSyafExIMeIcu7kF+mjBkXEmqu'
+#AMAZON S3 PERSONAL COPNFIGURATION
+
+AWS_ACCESS_KEY_ID = 'AKIAV7TA7TPMCSTP5AKY' #Enter your AWS Access Key ID 
+AWS_SECRET_ACCESS_KEY = 'RrNxy2GNmLwF3MqTUK8FOBkJXg1iM+lDgNRpjfRZ' #Enter your AWS secret Access Key ID 
 # AWS_REGION = 'us-east-1'  # e.g., 'us-east-1'
+
+AWS_STORAGE_BUCKET_NAME = 'cppbuckkron' #S3 Bucket name is added here
+
+#Django 4.2 > Storage configuration for S3
+
+STORAGES = {
+
+    #MANAGING MEDIA FILES
+    "default":{
+        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+
+    },
+
+    #MANAGING CSS and JS FILES
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+    },
+}
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+AWS_S3_FILE_OVERWRITE = False #To prevent clashing of the naming of the uploaded pictures
