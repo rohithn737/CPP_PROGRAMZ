@@ -95,14 +95,17 @@ MEDIA_ROOT = 'media'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-AWS_SECRETS = get_secret()
+# AWS_SECRETS = get_secret()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': AWS_SECRETS['db_name'] ,
-        'USER': AWS_SECRETS['db_user'],
-        'PASSWORD': AWS_SECRETS['db_pass'],
+        # 'NAME': AWS_SECRETS['db_name'] ,
+        'NAME': 'cppdbrn' ,
+        # 'USER': AWS_SECRETS['db_user'],
+        'USER': 'admin',
+        # 'PASSWORD': AWS_SECRETS['db_pass'],
+        'PASSWORD': 'Na#21#21#7531',
         'HOST': 'rn231194889db.chwlezgyi7rm.eu-west-1.rds.amazonaws.com',  # RDS endpoint
         'PORT': '3306',  # Adjust the port based on your RDS configuration
         'OPTIONS':{
