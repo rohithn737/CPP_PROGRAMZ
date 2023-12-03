@@ -157,8 +157,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #AMAZON S3 PERSONAL COPNFIGURATION
 
-AWS_ACCESS_KEY_ID = AWS_SECRETS['iamaccess_key'] #Enter your AWS Access Key ID 
-AWS_SECRET_ACCESS_KEY = AWS_SECRETS['iamsecretaccess_key'] #Enter your AWS secret Access Key ID 
+AWS_ACCESS_KEY_ID = 'AKIAV7TA7TPMCSTP5AKY' #Enter your AWS Access Key ID 
+AWS_SECRET_ACCESS_KEY = 'RrNxy2GNmLwF3MqTUK8FOBkJXg1iM+lDgNRpjfRZ' #Enter your AWS secret Access Key ID 
 # AWS_REGION = 'us-east-1'  # e.g., 'us-east-1'
 
 AWS_STORAGE_BUCKET_NAME = 'cppbuckkron' #S3 Bucket name is added here
