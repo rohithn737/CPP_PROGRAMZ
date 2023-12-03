@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os 
 from pathlib import Path
+from .dbsecrets import get_secret
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,13 +95,14 @@ MEDIA_ROOT = 'media'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+AWS_SECRETS = get_secret()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cppdbrn',
-        'USER': 'admin',
-        'PASSWORD': 'Na#21#21#7531',
+        'NAME': AWS_SECRETS['db_name'] ,
+        'USER': AWS_SECRETS['db_user'],
+        'PASSWORD': AWS_SECRETS['db_pass'],
         'HOST': 'rn231194889db.chwlezgyi7rm.eu-west-1.rds.amazonaws.com',  # RDS endpoint
         'PORT': '3306',  # Adjust the port based on your RDS configuration
         'OPTIONS':{
@@ -155,8 +157,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #AMAZON S3 PERSONAL COPNFIGURATION
 
-AWS_ACCESS_KEY_ID = 'AKIAV7TA7TPMCSTP5AKY' #Enter your AWS Access Key ID 
-AWS_SECRET_ACCESS_KEY = 'RrNxy2GNmLwF3MqTUK8FOBkJXg1iM+lDgNRpjfRZ' #Enter your AWS secret Access Key ID 
+AWS_ACCESS_KEY_ID = AWS_SECRETS['iamaccess_key'] #Enter your AWS Access Key ID 
+AWS_SECRET_ACCESS_KEY = AWS_SECRETS['iamsecretaccess_key'] #Enter your AWS secret Access Key ID 
 # AWS_REGION = 'us-east-1'  # e.g., 'us-east-1'
 
 AWS_STORAGE_BUCKET_NAME = 'cppbuckkron' #S3 Bucket name is added here
